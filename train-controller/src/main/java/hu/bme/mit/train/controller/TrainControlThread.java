@@ -4,7 +4,7 @@ import hu.bme.mit.train.interfaces.TrainController;
 
 public class TrainControlThread extends Thread {
 
-    private static final int STEP_INTERVAL = 1000;
+    private static final int STEP_INTERVAL = 100;
     private boolean running = false;
     private TrainControllerImpl trainControllerImpl;
 

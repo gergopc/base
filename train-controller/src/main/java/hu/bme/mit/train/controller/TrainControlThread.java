@@ -20,6 +20,7 @@ public class TrainControlThread extends Thread {
                 Thread.sleep(STEP_INTERVAL);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
     }

@@ -53,8 +53,13 @@ public class TrainControllerImpl implements TrainController {
 	}
 
 	public void stepReferenceSpeed() {
-		Timer timer = new Timer();		  
-		timer.scheduleAtFixedRate(() -> followSpeed(), 1000, 1000);
+		Timer t = new Timer();
+		t.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				followSpeed();
+			}
+		}, 0, 1000);
 	}
 
 }

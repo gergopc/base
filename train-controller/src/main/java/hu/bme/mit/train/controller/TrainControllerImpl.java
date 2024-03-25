@@ -8,6 +8,8 @@ public class TrainControllerImpl implements TrainController {
 	private int referenceSpeed = 0;
 	private int speedLimit = 0;
 
+	private TrainControlThread controlThread;
+
 	@Override
 	public void followSpeed() {
 		if (referenceSpeed < 0) {
@@ -49,6 +51,15 @@ public class TrainControllerImpl implements TrainController {
 	@Override
 	public void emergencyBreak() {
 		this.referenceSpeed = 0;
+	}
+
+	public void startSimulation(){
+		controlThread = new TrainControlThread(this);
+		controlThread.start();
+	}
+
+	public void stopSimulation(){
+		controlThread.stopSimulation();
 	}
 
 }

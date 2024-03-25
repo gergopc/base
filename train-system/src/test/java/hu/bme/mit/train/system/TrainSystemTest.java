@@ -3,6 +3,7 @@ package hu.bme.mit.train.system;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito.*;
 
 import hu.bme.mit.train.interfaces.TrainController;
 import hu.bme.mit.train.interfaces.TrainSensor;
@@ -23,6 +24,10 @@ public class TrainSystemTest {
 		user = system.getUser();
 
 		sensor.overrideSpeedLimit(50);
+
+		TrainUser mUser = mock(TrainUser.class);
+		TrainController mController = mock(TrainController.class);
+		TrainSensor mSensor = new TrainSensor(mController, mUser);
 	}
 	
 	@Test
@@ -77,6 +82,44 @@ public class TrainSystemTest {
 		sensor.addLog();
 		Assert.assertEquals(sensor.getLogSize(), 1);
 	}
+
+	@Test
+	public void AlarmLessThanZeroTest(){
+		sensor.overrideSpeedLimit(-10);
+		Assert.assertEquals(user.getAlarmState(), true);
+	}
+
+	@Test
+	public void AlarmGreaterThan500Test(){
+		sensor.overrideSpeedLimit(501);
+		Assert.assertEquals(user.getAlarmState(), true);
+	}
+
+
+	@Test
+	public void AlarmLessThanFiftyPercentTest(){
+	
+		mUser.overrideJoystickPosition(10);
+		mController.followSpeed();
+		Assert.assertEquals(10, mController.getReferenceSpeed());
+		mSensor.overrideSpeedLimit(1);
+		verify(mUser,times(1)).setAlarmState(true);
+		// Assert.assertEquals(1, sensor.getSpeedLimit());
+		// Assert.assertEquals(mUser.getAlarmState(), true);
+	}
+
+	@Test
+	public void AlarmMoreThanFiftyPercentTest(){
+		user.overrideJoystickPosition(10);
+		controller.followSpeed();
+		//Assert.assertEquals(10, controller.getReferenceSpeed());
+		sensor.overrideSpeedLimit(6);
+		Assert.assertEquals(user.getAlarmState(), false);
+	}
+
+
+
+
 
 	
 }

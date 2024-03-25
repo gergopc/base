@@ -1,7 +1,5 @@
 package hu.bme.mit.train.controller;
 
-import hu.bme.mit.train.interfaces.TrainController;
-
 public class TrainControlThread extends Thread {
 
     private static final int STEP_INTERVAL = 100;

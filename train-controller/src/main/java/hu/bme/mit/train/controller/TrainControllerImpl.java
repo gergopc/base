@@ -1,6 +1,7 @@
 package hu.bme.mit.train.controller;
 
 import hu.bme.mit.train.interfaces.TrainController;
+import java.util.Timer;
 
 public class TrainControllerImpl implements TrainController {
 
@@ -49,6 +50,11 @@ public class TrainControllerImpl implements TrainController {
 	@Override
 	public void emergencyBreak() {
 		this.referenceSpeed = 0;
+	}
+
+	public void stepReferenceSpeed() {
+		Timer timer = new Timer();		  
+		timer.scheduleAtFixedRate(() -> followSpeed(), 1000, 1000);
 	}
 
 }

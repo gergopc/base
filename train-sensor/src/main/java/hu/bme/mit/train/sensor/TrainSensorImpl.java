@@ -32,7 +32,11 @@ public class TrainSensorImpl implements TrainSensor {
 		
 		//Check for alarm
 		int refSpeed = controller.getReferenceSpeed();
-		if(speedLimit < 0 || speedLimit > 500 || (refSpeed>0 && (double) speedLimit / (double) refSpeed < 0.5)){
+		double diffSpeed = refSpeed - speedLimit;
+		double half = refSpeed * 0.5;
+		
+
+		if(speedLimit < 0 || speedLimit > 500 || (diffSpeed > half)){
 			user.setAlarmState(true);
 		}
 	}

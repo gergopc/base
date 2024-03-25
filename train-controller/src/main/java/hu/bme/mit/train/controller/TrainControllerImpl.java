@@ -52,6 +52,7 @@ public class TrainControllerImpl implements TrainController {
 		this.referenceSpeed = 0;
 	}
 
+	@Override
 	public void stepReferenceSpeed() {
 		Timer t = new Timer();
 		t.schedule(new TimerTask() {

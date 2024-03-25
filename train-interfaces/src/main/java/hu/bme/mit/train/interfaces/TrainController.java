@@ -12,4 +12,8 @@ public interface TrainController {
 
 	void emergencyBreak();
 
+	void startSimulation();
+
+	void stopSimulation();
+
 }

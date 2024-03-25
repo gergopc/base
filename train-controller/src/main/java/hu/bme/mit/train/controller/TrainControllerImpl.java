@@ -58,7 +58,7 @@ public class TrainControllerImpl implements TrainController {
 		controlThread.start();
 	}
 
-	public void stopSimulatio(){
+	public void stopSimulation(){
 		controlThread.stopSimulation();
 	}
 
